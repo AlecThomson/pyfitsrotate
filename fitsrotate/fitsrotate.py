@@ -26,7 +26,7 @@ def rotate_hdu(
     data: Union[np.ndarray, da.Array],
     header: fits.Header,
     wcs: WCS,
-) -> fits.ImageHDU:
+) -> fits.PrimaryHDU:
     """Rotate FITS HDU to put spectral axis first.
 
     Args:
@@ -50,7 +50,7 @@ def rotate_hdu(
     for key, value in wcs_head.items():
         header_swap[key] = value
 
-    return fits.ImageHDU(data=data_swap, header=header_swap)
+    return fits.PrimaryHDU(data=data_swap, header=header_swap)
 
 def main(
     filename: str,
