@@ -1,1 +1,1 @@
-from . import fitsrotate
+from .fitsrotate import *
