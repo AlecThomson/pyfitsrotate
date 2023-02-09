@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fitsrotate"
-version = "0.0.0"
+version = "0.0.1"
 description = "Rotate a FITS file to put spectral axis first"
 authors = ["Alec Thomson"]
 license = "MIT"
