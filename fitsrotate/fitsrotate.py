@@ -7,6 +7,7 @@ from astropy.io import fits
 from astropy.wcs import WCS
 import numpy as np
 import dask.array as da
+from dask.diagnostics import ProgressBar
 
 def fits_to_numpy(naxis: int, fits_idx: int) -> int:
     """Convert FITS axis index to numpy axis index.
@@ -83,7 +84,8 @@ def main(
         print(f"Writing rotated file to {outfile}...")
 
         hdulist[ext] = hdu_rot
-        hdulist.writeto(outfile, overwrite=True)
+        with ProgressBar():
+            hdulist.writeto(outfile, overwrite=True)
 
     print("Done!")
 
