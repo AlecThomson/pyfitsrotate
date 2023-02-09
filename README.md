@@ -8,11 +8,11 @@ The default action is to rotate the spectral axis to be the first axis. This is 
 ## Installation
 From github:
 ```
-pip install git+git://github.com/alecthomson/pyfitsrotate.git
+pip install git+https://github.com/AlecThomson/pyfitsrotate.git
 ```
 From PyPI:
 ```
-pip install pyfitsrotate
+pip install fitsrotate
 ```
 
 ## Usage
