@@ -18,7 +18,7 @@ pip install pyfitsrotate
 ## Usage
 ```
 ❯ fitsrotate -h
-usage: fitsrotate [-h] [-o [OUTFILE]] [-e EXT] filename
+usage: fitsrotate [-h] [-o [OUTFILE]] [-e EXT] [-s SWAP_AX] filename
 
 Rotate a FITS file to put spectral axis first.
 
@@ -30,4 +30,6 @@ optional arguments:
   -o [OUTFILE], --outfile [OUTFILE]
                         Output filename. Defaults to input filename with .rot.fits extension.
   -e EXT, --ext EXT     Extension number. Defaults to 0.
+  -s SWAP_AX, --swap-ax SWAP_AX
+                        Axis to swap with spectral axis (numpy convention). Defaults to -1.
 ```

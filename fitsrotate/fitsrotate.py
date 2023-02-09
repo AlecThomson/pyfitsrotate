@@ -26,6 +26,7 @@ def rotate_hdu(
     data: Union[np.ndarray, da.Array],
     header: fits.Header,
     wcs: WCS,
+    swap_ax: int = -1,
 ) -> fits.PrimaryHDU:
     """Rotate FITS HDU to put spectral axis first.
 
@@ -43,8 +44,8 @@ def rotate_hdu(
     spec_axis_idx = fits_to_numpy(wcs.naxis, spec_axis)
     print(f"Spectral axis is {spec_axis_idx} in numpy convention.")
 
-    data_swap = data.swapaxes(spec_axis_idx, -1)
-    wcs_swap = wcs.swapaxes(spec_axis_idx, -1)
+    data_swap = data.swapaxes(spec_axis_idx, swap_ax)
+    wcs_swap = wcs.swapaxes(spec_axis_idx, swap_ax)
     header_swap = header.copy()
     wcs_head = wcs_swap.to_header()
     for key, value in wcs_head.items():
@@ -56,6 +57,7 @@ def main(
     filename: str,
     outfile: Union[str, None] = None,
     ext: int = 0,
+    swap_ax: int = -1,
 ):
     """Rotate FITS file to put spectral axis first.
 
@@ -103,11 +105,19 @@ def cli():
         default=0,
         help="Extension number. Defaults to 0.",
     )
+    parser.add_argument(
+        "-s",
+        "--swap-ax",
+        type=int,
+        default=-1,
+        help="Axis to swap with spectral axis (numpy convention). Defaults to -1.",
+    )
     args = parser.parse_args()
     main(
         filename=args.filename,
         outfile=args.outfile,
-        ext=args.ext
+        ext=args.ext,
+        swap_ax=args.swap_ax,
     )
 
 if __name__ == "__main__":
