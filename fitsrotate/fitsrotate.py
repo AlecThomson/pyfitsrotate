@@ -3,11 +3,12 @@
 """Rotate a FITS file to put spectral axis first."""
 from typing import Union
 
+import dask.array as da
+import numpy as np
 from astropy.io import fits
 from astropy.wcs import WCS
-import numpy as np
-import dask.array as da
 from dask.diagnostics import ProgressBar
+
 
 def fits_to_numpy(naxis: int, fits_idx: int) -> int:
     """Convert FITS axis index to numpy axis index.
@@ -21,7 +22,8 @@ def fits_to_numpy(naxis: int, fits_idx: int) -> int:
 
     """
 
-    return np.arange(naxis-1, -1, -1)[fits_idx]
+    return np.arange(naxis - 1, -1, -1)[fits_idx]
+
 
 def rotate_hdu(
     data: Union[np.ndarray, da.Array],
@@ -53,6 +55,7 @@ def rotate_hdu(
         header_swap[key] = value
 
     return fits.PrimaryHDU(data=data_swap, header=header_swap)
+
 
 def main(
     filename: str,
@@ -89,8 +92,10 @@ def main(
 
     print("Done!")
 
+
 def cli():
     import argparse
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("filename", help="Input filename.")
     parser.add_argument(
@@ -121,6 +126,7 @@ def cli():
         ext=args.ext,
         swap_ax=args.swap_ax,
     )
+
 
 if __name__ == "__main__":
     cli()
