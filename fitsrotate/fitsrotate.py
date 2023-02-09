@@ -1,4 +1,6 @@
 #!/usr/bin env python3
+# -*- coding: utf-8 -*-
+"""Rotate a FITS file to put spectral axis first."""
 from typing import Union
 
 from astropy.io import fits
